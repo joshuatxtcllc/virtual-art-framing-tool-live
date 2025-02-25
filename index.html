@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Art Framing Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .frame {
+            border: 10px solid black;
+            padding: 10px;
+            margin: 20px auto;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .frame img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .frame.classic {
+            border-image: url('classic_frame.png') 30;
+        }
+        .frame.modern {
+            border-image: url('modern_frame.png') 30;
+        }
+    </style>
+</head>
+<body>
+    <h1>Virtual Art Framing Tool</h1>
+    <div>
+        <label for="artwork">Upload Artwork:</label>
+        <input type="file" id="artwork" accept="image/*" onchange="loadArtwork(event)">
+    </div>
+    <div>
+        <label for="frameStyle">Select Frame Style:</label>
+        <select id="frameStyle" onchange="changeFrameStyle()">
+            <option value="none">None</option>
+            <option value="classic">Classic</option>
+            <option value="modern">Modern</option>
+        </select>
+    </div>
+    <div class="frame" id="artFrame">
+        <img id="artImage" src="" alt="Artwork will be displayed here">
+    </div>
+    <script>
+        function loadArtwork(event) {
+            const artImage = document.getElementById('artImage');
+            artImage.src = URL.createObjectURL(event.target.files[0]);
+        }
+
+        function changeFrameStyle() {
+            const frame = document.getElementById('artFrame');
+            const selectedStyle = document.getElementById('frameStyle').value;
+            frame.className = 'frame ' + selectedStyle;
+        }
+    </script>
+</body>
+</html>
